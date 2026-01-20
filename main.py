@@ -1,5 +1,10 @@
 from utils.file_handler import read_sales_data
-from utils.data_processor import parse_transactions, validate_and_filter
+from utils.data_processor import (
+    parse_transactions, validate_and_filter,
+    calculate_total_revenue, region_wise_sales, top_selling_products,
+    customer_analysis, daily_sales_trend, find_peak_sales_day,
+    low_performing_products
+)
 import os
 
 def main():
@@ -18,24 +23,69 @@ def main():
     print("\n--- Task 1.2: Parsing Data ---")
     transactions = parse_transactions(raw_lines)
     print(f"Parsed {len(transactions)} transaction records.")
-    if transactions:
-        print(f"Sample record: {transactions[0]}")
+    
+    # Task 1.3: Validate and Filter (Get Clean Data)
+    print("\n--- Task 1.3: Validation ---")
+    # We use the filtered list (without specific filters) as our valid dataset for analysis
+    valid_transactions, invalid_count, summary = validate_and_filter(transactions)
+    print(f"Valid transactions for analysis: {len(valid_transactions)}")
+    
+    if not valid_transactions:
+        print("No valid transactions to analyze.")
+        return
+
+    # Task 2.1: Sales Summary Calculator
+    print("\n--- Task 2.1: Sales Summary Calculator ---")
+    
+    # a) Total Revenue
+    total_revenue = calculate_total_revenue(valid_transactions)
+    print(f"Total Revenue: {total_revenue:,.2f}")
+    
+    # b) Region-wise Sales
+    print("\nRegion-wise Sales Analysis:")
+    region_stats = region_wise_sales(valid_transactions)
+    for region, stats in region_stats.items():
+        print(f"  {region}: Sales={stats['total_sales']:,.2f}, Count={stats['transaction_count']}, Share={stats['percentage']}%")
         
-    # Task 1.3: Validate and Filter
-    print("\n--- Task 1.3: Validation and Filtering ---")
-    # Example usage: Filter by 'North' region, and maybe some amount
-    # The requirement says "Displays available options to user", which is done inside the function.
-    # But for this script, we can demonstrate a call.
+    # c) Top Selling Products
+    print("\nTop 5 Selling Products:")
+    top_products = top_selling_products(valid_transactions, n=5)
+    for prod in top_products:
+        print(f"  {prod[0]}: Qty={prod[1]}, Revenue={prod[2]:,.2f}")
+        
+    # d) Customer Analysis (Top 3 for brevity)
+    print("\nCustomer Purchase Analysis (Top 3):")
+    cust_stats = customer_analysis(valid_transactions)
+    for cid, stats in list(cust_stats.items())[:3]:
+        print(f"  {cid}: Spent={stats['total_spent']:,.2f}, Orders={stats['purchase_count']}, Avg={stats['avg_order_value']:,.2f}")
+        print(f"        Products: {stats['products_bought']}")
+
+    # Task 2.2: Date-based Analysis
+    print("\n--- Task 2.2: Date-based Analysis ---")
     
-    # Let's do a run without filters first to show validation stats
-    print("1. Run without filters:")
-    valid_tx, invalid_count, summary = validate_and_filter(transactions)
-    print("Summary:", summary)
+    # a) Daily Sales Trend
+    print("Daily Sales Trend:")
+    daily_stats = daily_sales_trend(valid_transactions)
+    for date, stats in daily_stats.items():
+        print(f"  {date}: Revenue={stats['revenue']:,.2f}, Tx={stats['transaction_count']}, Cust={stats['unique_customers']}")
+        
+    # b) Peak Sales Day
+    peak_day = find_peak_sales_day(valid_transactions)
+    if peak_day:
+        print(f"\nPeak Sales Day: {peak_day[0]} (Revenue: {peak_day[1]:,.2f}, Tx: {peak_day[2]})")
+
+    # Task 2.3: Product Performance
+    print("\n--- Task 2.3: Product Performance ---")
     
-    # Let's do a run WITH filters (e.g., Region='North')
-    print("\n2. Run with Region='North':")
-    valid_tx_north, invalid_count_north, summary_north = validate_and_filter(transactions, region='North')
-    print("Summary:", summary_north)
+    # a) Low Performing Products (Threshold=5 for demo)
+    threshold = 5
+    print(f"Low Performing Products (Qty < {threshold}):")
+    low_performers = low_performing_products(valid_transactions, threshold=threshold)
+    if low_performers:
+        for prod in low_performers:
+            print(f"  {prod[0]}: Qty={prod[1]}, Revenue={prod[2]:,.2f}")
+    else:
+        print("  No products found below threshold.")
 
 if __name__ == "__main__":
     main()

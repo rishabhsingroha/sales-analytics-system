@@ -150,3 +150,190 @@ def validate_and_filter(transactions, region=None, min_amount=None, max_amount=N
          print(f"Records after amount filter: {filter_summary['final_count']}")
          
     return filtered_list, invalid_count, filter_summary
+
+def calculate_total_revenue(transactions):
+    """
+    Calculates total revenue from all transactions
+    Returns: float (total revenue)
+    """
+    return sum(t['Quantity'] * t['UnitPrice'] for t in transactions)
+
+def region_wise_sales(transactions):
+    """
+    Analyzes sales by region
+    Returns: dictionary with region statistics
+    """
+    region_stats = {}
+    total_revenue = calculate_total_revenue(transactions)
+    
+    # Aggregation
+    for t in transactions:
+        region = t['Region']
+        amount = t['Quantity'] * t['UnitPrice']
+        
+        if region not in region_stats:
+            region_stats[region] = {'total_sales': 0.0, 'transaction_count': 0}
+        
+        region_stats[region]['total_sales'] += amount
+        region_stats[region]['transaction_count'] += 1
+        
+    # Calculate percentages and format
+    result = {}
+    for region, stats in region_stats.items():
+        percentage = (stats['total_sales'] / total_revenue * 100) if total_revenue > 0 else 0
+        result[region] = {
+            'total_sales': stats['total_sales'],
+            'transaction_count': stats['transaction_count'],
+            'percentage': round(percentage, 2)
+        }
+        
+    # Sort by total_sales descending
+    sorted_result = dict(sorted(result.items(), key=lambda item: item[1]['total_sales'], reverse=True))
+    return sorted_result
+
+def top_selling_products(transactions, n=5):
+    """
+    Finds top n products by total quantity sold
+    Returns: list of tuples (ProductName, TotalQuantity, TotalRevenue)
+    """
+    product_stats = {}
+    
+    for t in transactions:
+        pname = t['ProductName']
+        qty = t['Quantity']
+        amount = qty * t['UnitPrice']
+        
+        if pname not in product_stats:
+            product_stats[pname] = {'qty': 0, 'revenue': 0.0}
+            
+        product_stats[pname]['qty'] += qty
+        product_stats[pname]['revenue'] += amount
+        
+    # Convert to list of tuples
+    products_list = [
+        (pname, stats['qty'], stats['revenue']) 
+        for pname, stats in product_stats.items()
+    ]
+    
+    # Sort by TotalQuantity descending
+    products_list.sort(key=lambda x: x[1], reverse=True)
+    
+    return products_list[:n]
+
+def customer_analysis(transactions):
+    """
+    Analyzes customer purchase patterns
+    Returns: dictionary of customer statistics
+    """
+    customer_stats = {}
+    
+    for t in transactions:
+        cid = t['CustomerID']
+        amount = t['Quantity'] * t['UnitPrice']
+        pname = t['ProductName']
+        
+        if cid not in customer_stats:
+            customer_stats[cid] = {
+                'total_spent': 0.0,
+                'purchase_count': 0,
+                'products_bought': set()
+            }
+            
+        customer_stats[cid]['total_spent'] += amount
+        customer_stats[cid]['purchase_count'] += 1
+        customer_stats[cid]['products_bought'].add(pname)
+        
+    # Finalize format
+    result = {}
+    for cid, stats in customer_stats.items():
+        avg_value = stats['total_spent'] / stats['purchase_count'] if stats['purchase_count'] > 0 else 0
+        result[cid] = {
+            'total_spent': stats['total_spent'],
+            'purchase_count': stats['purchase_count'],
+            'avg_order_value': round(avg_value, 2),
+            'products_bought': list(stats['products_bought']) 
+        }
+        
+    # Sort by total_spent descending
+    sorted_result = dict(sorted(result.items(), key=lambda item: item[1]['total_spent'], reverse=True))
+    return sorted_result
+
+def daily_sales_trend(transactions):
+    """
+    Analyzes sales trends by date
+    Returns: dictionary sorted by date
+    """
+    daily_stats = {}
+    
+    for t in transactions:
+        date = t['Date']
+        amount = t['Quantity'] * t['UnitPrice']
+        cid = t['CustomerID']
+        
+        if date not in daily_stats:
+            daily_stats[date] = {
+                'revenue': 0.0,
+                'transaction_count': 0,
+                'customers': set()
+            }
+            
+        daily_stats[date]['revenue'] += amount
+        daily_stats[date]['transaction_count'] += 1
+        daily_stats[date]['customers'].add(cid)
+        
+    # Format and Sort chronologically
+    sorted_dates = sorted(daily_stats.keys())
+    result = {}
+    for date in sorted_dates:
+        stats = daily_stats[date]
+        result[date] = {
+            'revenue': stats['revenue'],
+            'transaction_count': stats['transaction_count'],
+            'unique_customers': len(stats['customers'])
+        }
+        
+    return result
+
+def find_peak_sales_day(transactions):
+    """
+    Identifies the date with highest revenue
+    Returns: tuple (date, revenue, transaction_count)
+    """
+    trend = daily_sales_trend(transactions)
+    if not trend:
+        return None
+        
+    peak_date = max(trend.items(), key=lambda x: x[1]['revenue'])
+    date = peak_date[0]
+    stats = peak_date[1]
+    
+    return (date, stats['revenue'], stats['transaction_count'])
+
+def low_performing_products(transactions, threshold=10):
+    """
+    Identifies products with low sales
+    Returns: list of tuples (ProductName, TotalQuantity, TotalRevenue)
+    """
+    product_stats = {}
+    
+    for t in transactions:
+        pname = t['ProductName']
+        qty = t['Quantity']
+        amount = qty * t['UnitPrice']
+        
+        if pname not in product_stats:
+            product_stats[pname] = {'qty': 0, 'revenue': 0.0}
+            
+        product_stats[pname]['qty'] += qty
+        product_stats[pname]['revenue'] += amount
+        
+    # Filter and format
+    low_performers = []
+    for pname, stats in product_stats.items():
+        if stats['qty'] < threshold:
+            low_performers.append((pname, stats['qty'], stats['revenue']))
+            
+    # Sort by TotalQuantity ascending
+    low_performers.sort(key=lambda x: x[1])
+    
+    return low_performers
