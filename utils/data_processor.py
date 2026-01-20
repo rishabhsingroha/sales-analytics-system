@@ -101,17 +101,6 @@ def validate_and_filter(transactions, region=None, min_amount=None, max_amount=N
             
     # 2. Filtering Phase
     
-    # Print available regions
-    unique_regions = sorted(list(set(t['Region'] for t in validated_list)))
-    print(f"Available regions: {unique_regions}")
-    
-    # Print transaction amount range
-    amounts = [t['Quantity'] * t['UnitPrice'] for t in validated_list]
-    if amounts:
-        print(f"Transaction amount range: Min={min(amounts):.2f}, Max={max(amounts):.2f}")
-    else:
-        print("Transaction amount range: N/A (no valid records)")
-        
     filtered_list = validated_list[:]
     filter_summary = {
         'total_input': len(transactions),
@@ -138,17 +127,6 @@ def validate_and_filter(transactions, region=None, min_amount=None, max_amount=N
     filter_summary['filtered_by_amount'] = before_count_amt - len(filtered_list)
     filter_summary['final_count'] = len(filtered_list)
     
-    # Show count of records after each filter applied (as per requirement)
-    # The summary dict captures the deltas.
-    # The requirement says "Show count of records after each filter applied".
-    # I'll print it here as well to satisfy "Filter Display" requirement.
-    
-    print(f"Records after validation: {len(validated_list)}")
-    if region:
-        print(f"Records after region filter ({region}): {len(validated_list) - filter_summary['filtered_by_region']}")
-    if min_amount is not None or max_amount is not None:
-         print(f"Records after amount filter: {filter_summary['final_count']}")
-         
     return filtered_list, invalid_count, filter_summary
 
 def calculate_total_revenue(transactions):

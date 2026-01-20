@@ -9,12 +9,12 @@ def fetch_all_products():
     """
     url = "https://dummyjson.com/products?limit=100"
     try:
-        print(f"Fetching products from {url}...")
+        # print(f"Fetching products from {url}...")
         response = requests.get(url, timeout=10)
         response.raise_for_status()
         data = response.json()
         products = data.get('products', [])
-        print(f"Successfully fetched {len(products)} products.")
+        # print(f"Successfully fetched {len(products)} products.")
         return products
     except requests.exceptions.RequestException as e:
         print(f"Error fetching products: {e}")
@@ -110,6 +110,6 @@ def save_enriched_data(enriched_transactions, filename='data/enriched_sales_data
                     else:
                         row.append(str(val))
                 f.write('|'.join(row) + '\n')
-        print(f"Successfully saved enriched data to {filename}")
+        # print(f"Successfully saved enriched data to {filename}")
     except IOError as e:
         print(f"Error saving file: {e}")

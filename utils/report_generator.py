@@ -132,4 +132,4 @@ def generate_sales_report(transactions, enriched_transactions, output_file='outp
         else:
             f.write("All products successfully enriched.\n")
 
-    print(f"Report generated successfully at {output_file}")
+    # print(f"Report generated successfully at {output_file}")
