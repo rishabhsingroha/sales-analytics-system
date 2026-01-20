@@ -9,6 +9,7 @@ from utils.api_handler import (
     fetch_all_products, create_product_mapping, 
     enrich_sales_data, save_enriched_data
 )
+from utils.report_generator import generate_sales_report
 import os
 
 def main():
@@ -41,6 +42,7 @@ def main():
     # Task 3: API Integration & Enrichment
     print("\n--- Task 3: API Integration & Enrichment ---")
     
+    enriched_transactions = []
     # 3.1 Fetch and Map
     api_products = fetch_all_products()
     if api_products:
@@ -112,6 +114,10 @@ def main():
             print(f"  {prod[0]}: Qty={prod[1]}, Revenue={prod[2]:,.2f}")
     else:
         print("  No products found below threshold.")
+
+    # Task 4.1: Generate Sales Report
+    print("\n--- Task 4.1: Generating Report ---")
+    generate_sales_report(valid_transactions, enriched_transactions)
 
 if __name__ == "__main__":
     main()
