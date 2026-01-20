@@ -5,6 +5,10 @@ from utils.data_processor import (
     customer_analysis, daily_sales_trend, find_peak_sales_day,
     low_performing_products
 )
+from utils.api_handler import (
+    fetch_all_products, create_product_mapping, 
+    enrich_sales_data, save_enriched_data
+)
 import os
 
 def main():
@@ -33,6 +37,28 @@ def main():
     if not valid_transactions:
         print("No valid transactions to analyze.")
         return
+
+    # Task 3: API Integration & Enrichment
+    print("\n--- Task 3: API Integration & Enrichment ---")
+    
+    # 3.1 Fetch and Map
+    api_products = fetch_all_products()
+    if api_products:
+        product_mapping = create_product_mapping(api_products)
+        print(f"Created mapping for {len(product_mapping)} products.")
+        
+        # 3.2 Enrich
+        print("Enriching sales data...")
+        enriched_transactions = enrich_sales_data(valid_transactions, product_mapping)
+        
+        # Check match rate
+        matches = sum(1 for t in enriched_transactions if t['API_Match'])
+        print(f"Enriched {matches} out of {len(enriched_transactions)} transactions.")
+        
+        # Save
+        save_enriched_data(enriched_transactions)
+    else:
+        print("Skipping enrichment due to API failure.")
 
     # Task 2.1: Sales Summary Calculator
     print("\n--- Task 2.1: Sales Summary Calculator ---")

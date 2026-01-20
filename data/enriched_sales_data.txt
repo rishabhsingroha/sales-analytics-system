@@ -1,0 +1,71 @@
+TransactionID|Date|ProductID|ProductName|Quantity|UnitPrice|CustomerID|Region|API_Category|API_Brand|API_Rating|API_Match
+T001|2024-12-01|P2|Mouse Wireless|3|500.0|C001|South|beauty|Glamour Beauty|2.86|True
+T002|2024-12-01|P2|Mouse Wireless|3|500.0|C002|East|beauty|Glamour Beauty|2.86|True
+T003|2024-12-01|P3|Keyboard|3|1500.0|C003|North|beauty|Velvet Touch|4.64|True
+T004|2024-12-01|P5|Headphones|3|2500.0|C004|North|beauty|Nail Couture|4.32|True
+T005|2024-12-01|P2|Mouse Wireless|4|500.0|C005|South|beauty|Glamour Beauty|2.86|True
+T006|2024-12-01|P1|Laptop|1|45000.0|C006|North|beauty|Essence|2.56|True
+T007|2024-12-01|P4|Monitor|2|12000.0|C007|South|beauty|Chic Cosmetics|4.36|True
+T008|2024-12-01|P2|Mouse Wireless|3|500.0|C008|South|beauty|Glamour Beauty|2.86|True
+T009|2024-12-01|P4|Monitor|2|12000.0|C009|West|beauty|Chic Cosmetics|4.36|True
+T010|2024-12-01|P1|Laptop|3|45000.0|C010|East|beauty|Essence|2.56|True
+T011|2024-12-01|P5|Headphones|3|2500.0|C011|North|beauty|Nail Couture|4.32|True
+T012|2024-12-01|P5|Headphones|2|2500.0|C012|North|beauty|Nail Couture|4.32|True
+T013|2024-12-01|P3|Keyboard|3|1500.0|C013|North|beauty|Velvet Touch|4.64|True
+T014|2024-12-01|P5|Headphones|1|2500.0|C014|West|beauty|Nail Couture|4.32|True
+T015|2024-12-01|P4|Monitor|2|12000.0|C015|West|beauty|Chic Cosmetics|4.36|True
+T016|2024-12-01|P3|Keyboard|3|1500.0|C016|West|beauty|Velvet Touch|4.64|True
+T017|2024-12-01|P1|Laptop|3|45000.0|C017|West|beauty|Essence|2.56|True
+T018|2024-12-01|P3|Keyboard|1|1500.0|C018|South|beauty|Velvet Touch|4.64|True
+T019|2024-12-01|P5|Headphones|5|2500.0|C019|East|beauty|Nail Couture|4.32|True
+T020|2024-12-01|P4|Monitor|1|12000.0|C020|North|beauty|Chic Cosmetics|4.36|True
+T021|2024-12-01|P3|Keyboard|2|1500.0|C021|West|beauty|Velvet Touch|4.64|True
+T022|2024-12-01|P1|Laptop|3|45000.0|C022|West|beauty|Essence|2.56|True
+T023|2024-12-01|P1|Laptop|2|45000.0|C023|South|beauty|Essence|2.56|True
+T024|2024-12-01|P4|Monitor|2|12000.0|C024|South|beauty|Chic Cosmetics|4.36|True
+T025|2024-12-01|P4|Monitor|1|12000.0|C025|North|beauty|Chic Cosmetics|4.36|True
+T026|2024-12-01|P5|Headphones|5|2500.0|C026|South|beauty|Nail Couture|4.32|True
+T027|2024-12-01|P1|Laptop|4|45000.0|C027|South|beauty|Essence|2.56|True
+T028|2024-12-01|P3|Keyboard|4|1500.0|C028|North|beauty|Velvet Touch|4.64|True
+T029|2024-12-01|P2|Mouse Wireless|5|500.0|C029|South|beauty|Glamour Beauty|2.86|True
+T030|2024-12-01|P5|Headphones|3|2500.0|C030|West|beauty|Nail Couture|4.32|True
+T031|2024-12-01|P3|Keyboard|5|1500.0|C031|South|beauty|Velvet Touch|4.64|True
+T032|2024-12-01|P3|Keyboard|3|1500.0|C032|West|beauty|Velvet Touch|4.64|True
+T033|2024-12-01|P2|Mouse Wireless|4|500.0|C033|West|beauty|Glamour Beauty|2.86|True
+T034|2024-12-01|P1|Laptop|5|45000.0|C034|East|beauty|Essence|2.56|True
+T035|2024-12-01|P2|Mouse Wireless|5|500.0|C035|East|beauty|Glamour Beauty|2.86|True
+T036|2024-12-01|P4|Monitor|1|12000.0|C036|North|beauty|Chic Cosmetics|4.36|True
+T037|2024-12-01|P2|Mouse Wireless|2|500.0|C037|North|beauty|Glamour Beauty|2.86|True
+T038|2024-12-01|P3|Keyboard|2|1500.0|C038|South|beauty|Velvet Touch|4.64|True
+T039|2024-12-01|P4|Monitor|2|12000.0|C039|South|beauty|Chic Cosmetics|4.36|True
+T040|2024-12-01|P3|Keyboard|2|1500.0|C040|West|beauty|Velvet Touch|4.64|True
+T041|2024-12-01|P3|Keyboard|4|1500.0|C041|North|beauty|Velvet Touch|4.64|True
+T042|2024-12-01|P3|Keyboard|3|1500.0|C042|East|beauty|Velvet Touch|4.64|True
+T043|2024-12-01|P3|Keyboard|1|1500.0|C043|East|beauty|Velvet Touch|4.64|True
+T044|2024-12-01|P3|Keyboard|2|1500.0|C044|East|beauty|Velvet Touch|4.64|True
+T045|2024-12-01|P3|Keyboard|5|1500.0|C045|East|beauty|Velvet Touch|4.64|True
+T046|2024-12-01|P1|Laptop|3|45000.0|C046|South|beauty|Essence|2.56|True
+T047|2024-12-01|P3|Keyboard|4|1500.0|C047|North|beauty|Velvet Touch|4.64|True
+T048|2024-12-01|P3|Keyboard|3|1500.0|C048|South|beauty|Velvet Touch|4.64|True
+T049|2024-12-01|P4|Monitor|2|12000.0|C049|South|beauty|Chic Cosmetics|4.36|True
+T050|2024-12-01|P3|Keyboard|3|1500.0|C050|South|beauty|Velvet Touch|4.64|True
+T051|2024-12-01|P5|Headphones|4|2500.0|C051|North|beauty|Nail Couture|4.32|True
+T052|2024-12-01|P2|Mouse Wireless|5|500.0|C052|South|beauty|Glamour Beauty|2.86|True
+T053|2024-12-01|P1|Laptop|2|45000.0|C053|West|beauty|Essence|2.56|True
+T054|2024-12-01|P3|Keyboard|4|1500.0|C054|North|beauty|Velvet Touch|4.64|True
+T055|2024-12-01|P1|Laptop|5|45000.0|C055|North|beauty|Essence|2.56|True
+T056|2024-12-01|P4|Monitor|4|12000.0|C056|East|beauty|Chic Cosmetics|4.36|True
+T057|2024-12-01|P3|Keyboard|4|1500.0|C057|West|beauty|Velvet Touch|4.64|True
+T058|2024-12-01|P1|Laptop|2|45000.0|C058|East|beauty|Essence|2.56|True
+T059|2024-12-01|P1|Laptop|2|45000.0|C059|North|beauty|Essence|2.56|True
+T060|2024-12-01|P2|Mouse Wireless|4|500.0|C060|North|beauty|Glamour Beauty|2.86|True
+T061|2024-12-01|P2|Mouse Wireless|2|500.0|C061|North|beauty|Glamour Beauty|2.86|True
+T062|2024-12-01|P5|Headphones|5|2500.0|C062|North|beauty|Nail Couture|4.32|True
+T063|2024-12-01|P5|Headphones|5|2500.0|C063|South|beauty|Nail Couture|4.32|True
+T064|2024-12-01|P5|Headphones|3|2500.0|C064|North|beauty|Nail Couture|4.32|True
+T065|2024-12-01|P5|Headphones|3|2500.0|C065|East|beauty|Nail Couture|4.32|True
+T066|2024-12-01|P4|Monitor|5|12000.0|C066|South|beauty|Chic Cosmetics|4.36|True
+T067|2024-12-01|P5|Headphones|4|2500.0|C067|South|beauty|Nail Couture|4.32|True
+T068|2024-12-01|P3|Keyboard|4|1500.0|C068|South|beauty|Velvet Touch|4.64|True
+T069|2024-12-01|P1|Laptop|2|45000.0|C069|West|beauty|Essence|2.56|True
+T070|2024-12-01|P3|Keyboard|1|1500.0|C070|East|beauty|Velvet Touch|4.64|True
