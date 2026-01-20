@@ -1,23 +1,41 @@
-from utils.file_handler import read_file
-from utils.data_processor import clean_and_validate_data
+from utils.file_handler import read_sales_data
+from utils.data_processor import parse_transactions, validate_and_filter
 import os
 
 def main():
     file_path = os.path.join("data", "sales_data.txt")
     
-    print("Reading data file...")
+    # Task 1.1: Read Data
+    print("--- Task 1.1: Reading Data ---")
     try:
-        lines = read_file(file_path)
+        raw_lines = read_sales_data(file_path)
+        print(f"Successfully read {len(raw_lines)} lines.")
     except FileNotFoundError:
         print(f"Error: File not found at {file_path}")
         return
         
-    print("Processing data...")
-    valid_records = clean_and_validate_data(lines)
+    # Task 1.2: Parse Data
+    print("\n--- Task 1.2: Parsing Data ---")
+    transactions = parse_transactions(raw_lines)
+    print(f"Parsed {len(transactions)} transaction records.")
+    if transactions:
+        print(f"Sample record: {transactions[0]}")
+        
+    # Task 1.3: Validate and Filter
+    print("\n--- Task 1.3: Validation and Filtering ---")
+    # Example usage: Filter by 'North' region, and maybe some amount
+    # The requirement says "Displays available options to user", which is done inside the function.
+    # But for this script, we can demonstrate a call.
     
-    # Optional: Save valid records to output (not explicitly requested but good practice/placeholder)
-    # output_path = os.path.join("output", "cleaned_sales_data.csv")
-    # ...
+    # Let's do a run without filters first to show validation stats
+    print("1. Run without filters:")
+    valid_tx, invalid_count, summary = validate_and_filter(transactions)
+    print("Summary:", summary)
+    
+    # Let's do a run WITH filters (e.g., Region='North')
+    print("\n2. Run with Region='North':")
+    valid_tx_north, invalid_count_north, summary_north = validate_and_filter(transactions, region='North')
+    print("Summary:", summary_north)
 
 if __name__ == "__main__":
     main()
